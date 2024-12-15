@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Konfabula</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    h1, h2 {
+      font-family: 'Manrope', sans-serif;
+    }
+
+    /* Animation keyframes */
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      }
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Animated circles */
+    .circle {
+      animation: pulse 4s infinite, float 6s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-black text-white relative min-h-screen flex flex-col overflow-hidden">
+  <!-- Header -->
+  <header class="flex justify-center items-center gap-6 p-6 border-b border-gray-800">
+  </header>
+
+
+  <!-- Hero Section -->
+  <main class="flex-1 flex flex-col justify-center items-center text-center px-6 relative">
+   
+
+    <div class="relative z-10 w-full max-w-screen-lg">
+      <h2 class="text-xl font-semibold mb-2">Test Konfabula</h2>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        Descubre cómo percibes<br />
+        y recreas la realidad
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 mb-8 w-[75%] mx-auto">
+        El Test Konfabula es una herramienta interactiva basada en manchas abstractas que evalúa cómo interpretas imágenes y creas historias a partir de ellas. Inspirado en el test de Rorschach y adaptado para explorar aspectos relacionados con la dinámica de Konfisoft, este test te orienta en analizar posibles distorsiones de la memoria y la construcción.
+      </p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <a href="test.html" class="px-6 py-3 border border-white text-white rounded-md hover:bg-white hover:text-black transition">
+            Comenzar Test
+          </a>
+      
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

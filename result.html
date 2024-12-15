@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado - Test Konfabula</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white flex flex-col justify-center items-center min-h-screen">
+  <h1 class="text-4xl font-semibold mb-8">Resultado Final</h1>
+  <div class="text-xl">
+    <p>Tu puntaje total es: <span id="total-score"></span></p>
+  </div>
+
+  <!-- Button to restart the test -->
+  <button id="restart-btn" class="mt-8 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-lg">
+    Empezar de nuevo
+  </button>
+
+  <script>
+    // Get the total score from localStorage
+    const totalScore = localStorage.getItem('totalScore');
+    document.getElementById('total-score').textContent = totalScore || 'No se pudo calcular el puntaje.';
+
+    // Add event listener to the restart button
+    document.getElementById('restart-btn').addEventListener('click', function() {
+      // Clear all responses and reset localStorage
+      localStorage.clear();
+      
+      // Redirect to the test page
+      window.location.href = 'test.html'; // Replace 'test.html' with your test page URL
+    });
+  </script>
+</body>
+</html>
