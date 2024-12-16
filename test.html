@@ -178,7 +178,7 @@
         pos.x = newCol * cellWidth + cellWidth / 2;
         pos.y = newRow * cellHeight + cellHeight / 2;
 
-        console.log(Movido a nueva zona: fila ${newRow}, columna ${newCol});
+        console.log(`Movido a nueva zona: fila ${newRow}, columna ${newCol}`);
     }
 
     function startGeneration() {
@@ -186,7 +186,7 @@
 
         resetParameters(); // Limpiar parámetros y gráficos
         isGenerating = true;
-        loop(); // Iniciar ciclo de draw
+        loop(); // Iniciar ciclo de `draw`
 
         // Desactivar botón mientras genera
         document.getElementById('generate-btn').disabled = true;
@@ -201,7 +201,7 @@
         if (!isGenerating) return;
 
         isGenerating = false;
-        noLoop(); // Detener el ciclo draw
+        noLoop(); // Detener el ciclo `draw`
 
         // Limpiar temporizador si está pendiente
         clearTimeout(generationTimer);
