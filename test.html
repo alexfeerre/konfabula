@@ -1,53 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generador de Texturas</title>
+  <title>Acerca del Korsakoff</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Poppins:wght@400;600&display=swap');
-    body {
-      font-family: 'Poppins', sans-serif;
+    /* Scrollbar personalizado */
+    ::-webkit-scrollbar {
+      width: 15px;
     }
-    h1, h2 {
-      font-family: 'Manrope', sans-serif;
+
+    ::-webkit-scrollbar-track {
+      background: black;
+      border: 1px solid white;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: black;
+      border: 1px solid white;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #333;
     }
   </style>
 </head>
-<body class="bg-black text-white relative min-h-screen flex flex-col">
-  <header class="flex justify-center items-center gap-8 p-4 border-b border-gray-800">
-    <a href="korsakoff.html" class="text-base font-medium hover:underline">Acerca del Korsakoff</a>
-    <a href="index.html" class="text-base font-medium hover:underline">Test Konfabula</a>
-</header>
+<body class="bg-black text-white font-serif h-screen">
+  <div class="grid grid-cols-6 h-screen">
+    <!-- Sidebar -->
+    <div class="relative block col-span-1 h-full flex flex-col items-center justify-center border-r">
+      <!-- Indicador de navegación -->
+      <div id="indicator" class="absolute top-0 left-0 w-1 bg-white transition-all duration-300"></div>
 
-  <main class="flex-1 flex flex-col justify-center items-center text-center px-6 py-12 relative">
-    
-    <div class="w-full max-w-screen-md">
-      <div id="canvas-container" class="bg-white w-full h-96 rounded-md mb-8"></div>
+      <!-- Título -->
+      <a href="index.html" class="text-4xl mb-12 block hover:scale-105 transition-transform duration-300">
+        <h1>INICIO</h1>
+      </a>
 
-      <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
-        <button id="generate-btn" class="px-5 py-2 bg-white text-black rounded-md hover:bg-gray-200 transition text-sm">
-          Generar Textura
-        </button>
-        <button id="download-btn" class="px-5 py-2 bg-white text-black rounded-md hover:bg-gray-200 transition text-sm">
-          Descargar Textura
-        </button>
+      <!-- Navegación -->
+      <nav class="flex flex-col space-y-6">
+        <a href="korsakoff.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
+          Korsakoff
+        </a>
+        <a href="test.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
+          Konfabula
+        </a>
+      </nav>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="col-span-5 overflow-y-auto px-8 pt-36 pb-36 pl-36 pr-36">
+      <div class="w-full max-w-screen-md">
+        <div id="canvas-container" class="bg-white w-full h-96 rounded-md mb-8"></div>
+        <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
+          <button id="generate-btn" class="px-5 py-2 bg-white text-black rounded-md hover:bg-gray-200 transition text-sm">
+            Generar Textura
+          </button>
+          <button id="download-btn" class="px-5 py-2 bg-white text-black rounded-md hover:bg-gray-200 transition text-sm">
+            Descargar Textura
+          </button>
+        </div>
       </div>
     </div>
-  </main>
-
-  <footer class="bg-gray-50 text-gray-600 py-8">
-    <div class="text-center text-xs md:text-sm">
-        <p>© 2024 Generador de Texturas. Todos los derechos reservados.</p>
-    </div>
-  </footer>
+  </div>
 
   <script>
     let points = [];
-    let pos, npos;
-    let pg;
+    let pos, pg;
     let maxPoints, maxDist, maxSize;
     let isGenerating = false;
     let generationTimer = null;
@@ -57,168 +79,156 @@
     let cellWidth, cellHeight;
     let pointCountGrid;
 
-    const generationDuration = 9000; // Tiempo límite reducido a 5 segundos
+    const generationDuration = 7000; // Detener generación tras 7 segundos.
 
     function setup() {
-        const canvasContainer = document.getElementById('canvas-container');
-        const canvas = createCanvas(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
-        canvas.parent('canvas-container');
-        pixelDensity(2);
+      const canvasContainer = document.getElementById('canvas-container');
+      const canvas = createCanvas(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
+      canvas.parent('canvas-container');
+      pixelDensity(2);
 
-        pg = createGraphics(width, height);
-        pg.pixelDensity(2);
+      pg = createGraphics(width, height);
+      pg.pixelDensity(2);
 
-        cellWidth = width / gridCols;
-        cellHeight = height / gridRows;
+      cellWidth = width / gridCols;
+      cellHeight = height / gridRows;
 
-        resetParameters();
+      resetParameters();
 
-        document.getElementById('generate-btn').addEventListener('click', startGeneration);
-        document.getElementById('download-btn').addEventListener('click', downloadTexture);
+      document.getElementById('generate-btn').addEventListener('click', startGeneration);
+      document.getElementById('download-btn').addEventListener('click', downloadTexture);
     }
 
     function windowResized() {
-        const canvasContainer = document.getElementById('canvas-container');
-        resizeCanvas(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
-        pg = createGraphics(width, height);
-        pg.pixelDensity(2);
+      const canvasContainer = document.getElementById('canvas-container');
+      resizeCanvas(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
+      pg = createGraphics(width, height);
+      pg.pixelDensity(2);
 
-        cellWidth = width / gridCols;
-        cellHeight = height / gridRows;
+      cellWidth = width / gridCols;
+      cellHeight = height / gridRows;
 
-        resetParameters();
+      resetParameters();
     }
 
     function draw() {
-        if (!isGenerating) return;
+      if (!isGenerating) return;
 
-        background(255);
-        generateRandom();
-        drawSymmetry();
+      background(255);
+      generateRandom();
+      drawSymmetry();
 
-        // Detener la generación si se alcanzó el máximo de puntos
-        if (points.length >= maxPoints) {
-            console.log("Máximo de puntos alcanzado.");
-            stopGeneration();
-        }
+      // Detener si se alcanzó el máximo de puntos
+      if (points.length >= maxPoints) {
+        stopGeneration();
+      }
     }
 
     function resetParameters() {
-        background(255);
-        pg.clear();
-        points = [];
-        pos = createVector(width / 2, height / 2);
+      background(255);
+      pg.clear();
+      points = [];
+      pos = createVector(width / 2, height / 2);
 
-        maxPoints = floor(random(1000, 2000));
-        maxDist = floor(random(50, 150));
-        maxSize = floor(random(width / 60, width / 90));
-        pointCountGrid = Array.from({ length: gridRows }, () => Array(gridCols).fill(0));
+      maxPoints = floor(random(1000, 2000));
+      maxDist = floor(random(50, 150));
+      maxSize = floor(random(width / 60, width / 90));
+      pointCountGrid = Array.from({ length: gridRows }, () => Array(gridCols).fill(0));
     }
 
     function generateRandom() {
-        if (points.length < maxPoints) {
-            const currentCell = getCell(pos);
+      if (points.length < maxPoints) {
+        const currentCell = getCell(pos);
 
-            if (pointCountGrid[currentCell.row][currentCell.col] > 50) {
-                moveToNewZone();
-                return;
-            }
-
-            for (let point of points) {
-                if (dist(pos.x, pos.y, point.x, point.y) < maxDist) {
-                    pg.stroke(0, 10);
-                    pg.line(pos.x, pos.y, point.x, point.y);
-                    applySymmetryToLine(pos, point);
-                }
-            }
-
-            applySymmetryToPoint(pos);
-            points.push(createVector(pos.x, pos.y));
-            pointCountGrid[currentCell.row][currentCell.col]++;
-
-            pos.x += random(-maxSize * 2, maxSize * 2);
-            pos.y += random(-maxSize * 2, maxSize * 2);
-
-            if (pos.x < width * 0.05 || pos.x > width * 0.95) pos.x = width / 2;
-            if (pos.y < height * 0.05 || pos.y > height * 0.95) pos.y = height / 2;
+        if (pointCountGrid[currentCell.row][currentCell.col] > 50) {
+          moveToNewZone();
+          return;
         }
+
+        for (let point of points) {
+          if (dist(pos.x, pos.y, point.x, point.y) < maxDist) {
+            pg.stroke(0, 10);
+            pg.line(pos.x, pos.y, point.x, point.y);
+            applySymmetryToLine(pos, point);
+          }
+        }
+
+        applySymmetryToPoint(pos);
+        points.push(createVector(pos.x, pos.y));
+        pointCountGrid[currentCell.row][currentCell.col]++;
+
+        pos.x += random(-maxSize * 2, maxSize * 2);
+        pos.y += random(-maxSize * 2, maxSize * 2);
+
+        if (pos.x < width * 0.05 || pos.x > width * 0.95) pos.x = width / 2;
+        if (pos.y < height * 0.05 || pos.y > height * 0.95) pos.y = height / 2;
+      }
     }
 
     function applySymmetryToPoint(point) {
-        pg.noStroke();
-        pg.fill(0, 30);
-        pg.ellipse(point.x, point.y, 5);
-        const symPoint = createVector(width - point.x, point.y);
-        pg.ellipse(symPoint.x, symPoint.y, 5);
+      pg.noStroke();
+      pg.fill(0, 30);
+      pg.ellipse(point.x, point.y, 5);
+      const symPoint = createVector(width - point.x, point.y);
+      pg.ellipse(symPoint.x, symPoint.y, 5);
     }
 
     function applySymmetryToLine(p1, p2) {
-        const symP1 = createVector(width - p1.x, p1.y);
-        const symP2 = createVector(width - p2.x, p2.y);
-        pg.line(symP1.x, symP1.y, symP2.x, symP2.y);
+      const symP1 = createVector(width - p1.x, p1.y);
+      const symP2 = createVector(width - p2.x, p2.y);
+      pg.line(symP1.x, symP1.y, symP2.x, symP2.y);
     }
 
     function drawSymmetry() {
-        image(pg, 0, 0, width, height);
+      image(pg, 0, 0, width, height);
     }
 
     function getCell(position) {
-        const col = Math.floor(position.x / cellWidth);
-        const row = Math.floor(position.y / cellHeight);
-        return { row, col };
+      const col = Math.floor(position.x / cellWidth);
+      const row = Math.floor(position.y / cellHeight);
+      return { row, col };
     }
 
     function moveToNewZone() {
-        let newCol, newRow;
-        do {
-            newCol = Math.floor(random(gridCols));
-            newRow = Math.floor(random(gridRows));
-        } while (pointCountGrid[newRow][newCol] > 50);
+      let newCol, newRow;
+      do {
+        newCol = Math.floor(random(gridCols));
+        newRow = Math.floor(random(gridRows));
+      } while (pointCountGrid[newRow][newCol] > 50);
 
-        pos.x = newCol * cellWidth + cellWidth / 2;
-        pos.y = newRow * cellHeight + cellHeight / 2;
-
-        console.log(`Movido a nueva zona: fila ${newRow}, columna ${newCol}`);
+      pos.x = newCol * cellWidth + cellWidth / 2;
+      pos.y = newRow * cellHeight + cellHeight / 2;
     }
 
     function startGeneration() {
-        if (isGenerating) return; // Evitar múltiples ejecuciones
+      if (isGenerating) return;
 
-        resetParameters(); // Limpiar parámetros y gráficos
-        isGenerating = true;
-        loop(); // Iniciar ciclo de `draw`
+      resetParameters();
+      isGenerating = true;
+      loop();
 
-        // Desactivar botón mientras genera
-        document.getElementById('generate-btn').disabled = true;
+      document.getElementById('generate-btn').disabled = true;
 
-        // Establecer un temporizador para detener la generación automáticamente
-        generationTimer = setTimeout(() => {
-            stopGeneration();
-        }, generationDuration);
+      generationTimer = setTimeout(() => {
+        stopGeneration();
+      }, generationDuration);
     }
 
     function stopGeneration() {
-        if (!isGenerating) return;
+      if (!isGenerating) return;
 
-        isGenerating = false;
-        noLoop(); // Detener el ciclo `draw`
+      isGenerating = false;
+      noLoop();
+      clearTimeout(generationTimer);
 
-        // Limpiar temporizador si está pendiente
-        clearTimeout(generationTimer);
-
-        // Reactivar botón de generar
-        document.getElementById('generate-btn').disabled = false;
-
-        console.log("Generación finalizada.");
+      document.getElementById('generate-btn').disabled = false;
     }
 
     function downloadTexture() {
-        if (pg) {
-            save(pg, 'Mancha_generada.png');
-        }
+      if (pg) {
+        save(pg, 'Mancha_generada.png');
+      }
     }
-</script>
-
-
+  </script>
 </body>
 </html>
