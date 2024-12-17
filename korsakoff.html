@@ -1,21 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Síndrome de Korsakoff</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-black text-white font-sans">
-    <!-- Header -->
-    <header class="flex justify-center items-center gap-8 p-4 border-b border-gray-800">
-        <a href="korsakoff.html" class="text-base font-medium hover:underline">Acerca del Korsakoff</a>
-        <a href="index.html" class="text-base font-medium hover:underline">Test Konfabula</a>
-    </header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acerca del Korsakoff</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Scrollbar personalizado */
+    ::-webkit-scrollbar {
+      width: 15px;
+    }
 
-    <!-- Contenedor principal -->
-    <div class="max-w-6xl mx-auto px-4 py-12 space-y-20">
-        <!-- Título principal -->
+    ::-webkit-scrollbar-track {
+      background: black;
+      border: 1px solid white;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: black;
+      border: 1px solid white;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-serif h-screen">
+  <div class="grid grid-cols-6 h-screen">
+   <!-- Sidebar -->
+   <div class="relative block col-span-1 h-full flex flex-col items-center justify-center border-r">
+    <!-- Indicador de navegación -->
+    <div id="indicator" class="absolute top-0 left-0 w-1 bg-white transition-all duration-300"></div>
+
+     <!-- Título -->
+     <a href="index.html" class="text-4xl mb-12 block hover:scale-105 transition-transform duration-300">
+      <h1>INICIO</h1>
+    </a>
+
+    <!-- Navegación -->
+    <nav class="flex flex-col space-y-6">
+      <a href="korsakoff.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
+        Korsakoff
+      </a>
+      <a href="test.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
+        Konfabula
+      </a>
+    </nav>
+  </div>
+
+    <!-- Contenido Principal -->
+    <div class="col-span-5 overflow-y-auto px-8 pt-36 pb-36 pl-36 pr-36">
+      
+
+
+
+          <!-- Título principal -->
         <section class="text-center space-y-4">
             <h1 class="text-2xl md:text-4xl font-semibold">
                 ¿Qué es el Síndrome de Korsakoff?
@@ -26,7 +66,7 @@
         </section>
 
         <!-- Sección de causas -->
-        <section class="text-center space-y-4">
+        <section class="text-center space-y-4 pt-16">
             <h2 class="text-xl md:text-2xl font-semibold">
                 Causas
             </h2>
@@ -38,12 +78,12 @@
         </section>
 
         <!-- Imagen después de causas -->
-        <section class="text-center">
-            <img src="assets/images/korsakoff.png" alt="Descripción de la imagen" class="w-full max-w-3xl mx-auto rounded-lg shadow-lg">
+        <section class="text-center pt-16">
+            <img src="korsakoff.png" alt="Descripción de la imagen" class="w-full max-w-3xl mx-auto rounded-lg shadow-lg">
         </section>
 
         <!-- Sección de síntomas -->
-        <section class="space-y-12">
+        <section class="space-y-12 pt-36">
             <h2 class="text-center text-xl md:text-2xl font-semibold">
                 Síntomas principales
             </h2>
@@ -51,19 +91,19 @@
                 <!-- Columna 1 -->
                 <div class="space-y-3">
                     <h3 class="text-base font-semibold">Alteraciones en la cognición</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
                         Problemas de atención, juicio y resolución de problemas.
                     </p>
                 </div>
                 <div class="space-y-3">
                     <h3 class="text-base font-semibold">Amnesia retrógrada</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
                         Pérdida de recuerdos anteriores y fragmentación de la memoria, más indicado que en otras condiciones clínicas que presentan amnesia.
                     </p>
                 </div>
                 <div class="space-y-3">
                     <h3 class="text-base font-semibold">Desorientación temporal</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
                         Al preguntar por su infancia, el paciente habla en presente, como si estuviese en una experiencia reciente. En resumen, una dificultad para ubicar eventos en el tiempo correcto.
                     </p>
                 </div>
@@ -71,41 +111,25 @@
                 <!-- Columna 2 -->
                 <div class="space-y-3">
                     <h3 class="text-base font-semibold">Confabulación</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
                         Completar lagunas de la memoria con inventos, estos no son alucinaciones sino errores no intencionados al comparar los fallos de la memoria.
                     </p>
                 </div>
                 <div class="space-y-3">
                     <h3 class="text-base font-semibold">Amnesia anterógrada</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
                         La amnesia retrógrada está desconectada; dificultades para todo tipo de actividades que involucren aprender, ya sean nuevos nombres, caras, lugares...
                     </p>
                 </div>
                 <div class="space-y-3">
                     <h3 class="text-base font-semibold">Cambios de comportamiento</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
                         Apatía, retraimiento social y, en algunos casos, comportamientos impulsivos o inapropiados.
                     </p>
                 </div>
             </div>
         </section>
     </div>
-
-    <!-- División antes del Footer -->
-    <div class="mt-16 border-t border-gray-700"></div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-50 text-gray-600 py-8">
-        <div class="text-center space-y-2 text-xs md:text-sm">
-            <p>© 2024 Test Konfabula.</p>
-            <p>
-                Esta web está diseñada con fines educativos y de divulgación sobre el síndrome de Korsakoff.
-            </p>
-            <p>
-                El contenido no reemplaza el consejo médico profesional.
-            </p>
-            <p>Todos los derechos reservados.</p>
-        </div>
-    </footer>
+  </div>
 </body>
 </html>
