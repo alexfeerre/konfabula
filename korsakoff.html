@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,112 +25,138 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #333;
     }
+
+    /* Efecto de escritura y animación */
+    .typing {
+      border-right: 2px solid white;
+      animation: blink 0.6s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* Asegurar padding del contenedor principal */
+    #fraseContainer {
+      padding: 36px 36px 36px 36px; /* Equivalente a pt-36 pb-36 pl-36 pr-36 */
+      width: calc(100% - 72px); /* Ajustar ancho total para considerar padding horizontal */
+      height: calc(100% - 72px); /* Ajustar alto total para considerar padding vertical */
+      box-sizing: border-box; /* Incluir padding dentro del tamaño del contenedor */
+    }
   </style>
 </head>
 <body class="bg-black text-white font-serif h-screen">
   <div class="grid grid-cols-6 h-screen">
-   <!-- Sidebar -->
-   <div class="relative block col-span-1 h-full flex flex-col items-center justify-center border-r">
-    <!-- Indicador de navegación -->
-    <div id="indicator" class="absolute top-0 left-0 w-1 bg-white transition-all duration-300"></div>
+    <!-- Sidebar -->
+    <div class="relative block col-span-1 h-full flex flex-col items-center justify-center border-r">
+      <!-- Indicador de navegación -->
+      <div id="indicator" class="absolute top-0 left-0 w-1 bg-white transition-all duration-300"></div>
 
-     <!-- Título -->
-     <a href="index.html" class="text-4xl mb-12 block hover:scale-105 transition-transform duration-300">
-      <h1>INICIO</h1>
-    </a>
+      <!-- Título -->
+      <a href="index.html" class="text-4xl mb-12 block hover:scale-105 transition-transform duration-300">
+        <h1>INICIO</h1>
+      </a>
 
-    <!-- Navegación -->
-    <nav class="flex flex-col space-y-6">
-      <a href="korsakoff.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
-        Korsakoff
-      </a>
-      <a href="test.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
-        Konfabula
-      </a>
-    </nav>
-  </div>
+      <!-- Navegación -->
+      <nav class="flex flex-col space-y-6">
+        <a href="korsakoff.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
+          Korsakoff
+        </a>
+        <a href="test.html" class="nav-link text-base leading-7 hover:text-gray-400 hover:scale-105 transition-transform duration-300">
+          Konfabula
+        </a>
+      </nav>
+    </div>
 
     <!-- Contenido Principal -->
-    <div class="col-span-5 overflow-y-auto px-8 pt-36 pb-36 pl-36 pr-36">
-      
-
-
-
-          <!-- Título principal -->
-        <section class="text-center space-y-4">
-            <h1 class="text-2xl md:text-4xl font-semibold">
-                ¿Qué es el Síndrome de Korsakoff?
-            </h1>
-            <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
-                El síndrome de Korsakoff es un trastorno cerebral causado por una deficiencia grave de vitamina B1 (tiamina), que afecta la memoria y otras funciones cognitivas. Es común en personas con alcoholismo crónico o desnutrición severa.
-            </p>
-        </section>
-
-        <!-- Sección de causas -->
-        <section class="text-center space-y-4 pt-16">
-            <h2 class="text-xl md:text-2xl font-semibold">
-                Causas
-            </h2>
-            <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Falta de vitamina B1 (tiamina): Nutriente esencial para el cerebro.<br>
-                Alcoholismo crónico: Dificulta la absorción de tiamina.<br>
-                No consumir alimentos ricos en esta vitamina puede desencadenarlo.
-            </p>
-        </section>
-
-        <!-- Imagen después de causas -->
-        <section class="text-center pt-16">
-            <img src="assets/images/korsakoff.png" alt="Descripción de la imagen" class="w-full max-w-3xl mx-auto rounded-lg shadow-lg">
-        </section>
-
-        <!-- Sección de síntomas -->
-        <section class="space-y-12 pt-36">
-            <h2 class="text-center text-xl md:text-2xl font-semibold">
-                Síntomas principales
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <!-- Columna 1 -->
-                <div class="space-y-3">
-                    <h3 class="text-base font-semibold">Alteraciones en la cognición</h3>
-                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
-                        Problemas de atención, juicio y resolución de problemas.
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-base font-semibold">Amnesia retrógrada</h3>
-                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
-                        Pérdida de recuerdos anteriores y fragmentación de la memoria, más indicado que en otras condiciones clínicas que presentan amnesia.
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-base font-semibold">Desorientación temporal</h3>
-                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
-                        Al preguntar por su infancia, el paciente habla en presente, como si estuviese en una experiencia reciente. En resumen, una dificultad para ubicar eventos en el tiempo correcto.
-                    </p>
-                </div>
-
-                <!-- Columna 2 -->
-                <div class="space-y-3">
-                    <h3 class="text-base font-semibold">Confabulación</h3>
-                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
-                        Completar lagunas de la memoria con inventos, estos no son alucinaciones sino errores no intencionados al comparar los fallos de la memoria.
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-base font-semibold">Amnesia anterógrada</h3>
-                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
-                        La amnesia retrógrada está desconectada; dificultades para todo tipo de actividades que involucren aprender, ya sean nuevos nombres, caras, lugares...
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-base font-semibold">Cambios de comportamiento</h3>
-                    <p class="text-xs md:text-base text-gray-400 max-w-2xl mx-auto">
-                        Apatía, retraimiento social y, en algunos casos, comportamientos impulsivos o inapropiados.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <div class="col-span-5 overflow-hidden px-8 pt-36 pb-36 pl-36 pr-36 relative">
+      <div id="fraseContainer" class="space-y-2 leading-relaxed">
+        <!-- Frases generadas dinámicamente -->
+      </div>
     </div>
   </div>
+
+  <script>
+ const frases = [
+"Jimmie vivía en un presente perpetuo y vacío.",
+"Su memoria era un terreno fragmentado por el olvido.",
+"Cada día era nuevo, pero siempre igual al anterior.",
+"Recuerdos claros de juventud, presente que se desvanece.",
+"Jimmie no sabía que olvidaba; todo era nuevo.",
+"El pasado brillaba; el presente caía como arena.",
+"Su memoria era un disco rayado sin avance.",
+"Vivía en un mundo sin tiempo ni continuidad.",
+"La música despertaba algo profundo en su alma.",
+"El presente era un vacío que nunca llenaba.",
+"Jimmie se iluminaba al recordar su juventud perdida.",
+"Korsakoff le robó el futuro y dejó solo pasado.",
+"En la capilla, Jimmie hallaba paz más allá del tiempo.",
+"Vivía aislado en una isla del tiempo eterno.",
+"Preguntaba la fecha, siempre sorprendido por la respuesta.",
+"Su identidad anclada en un tiempo inexistente y lejano.",
+"Korsakoff borró recuerdos nuevos, pero no su humanidad.",
+"Incapaz de aprender, atrapado en un eterno presente.",
+"El amor y la música trascendían su olvido constante.",
+"Cada conversación con él era como la primera.",
+"El presente se desmoronaba si dejaba de mirarlo.",
+"Su sonrisa irradiaba calidez, pese a su desconexión.",
+"No recordaba, pero sentía belleza en cada momento.",
+"Los recuerdos de infancia eran su único ancla estable.",
+"El tiempo fluía, pero para él estaba detenido.",
+"Encontraba consuelo en la rutina sin necesidad de memoria.",
+    ];
+
+    const container = document.getElementById("fraseContainer");
+    const maxFrases = 10; // Máximo de frases visibles
+
+    function escribirFrase(texto, callback) {
+      let index = 0;
+      const fraseElement = document.createElement("p");
+      fraseElement.classList.add("opacity-100", "text-3xl", "typing");
+      fraseElement.style.transform = "translateY(0px)";
+      container.prepend(fraseElement);
+
+      // Efecto de máquina de escribir
+      function escribir() {
+        if (index < texto.length) {
+          fraseElement.textContent += texto.charAt(index);
+          index++;
+          setTimeout(escribir, 50); // Velocidad de escritura
+        } else {
+          fraseElement.classList.remove("typing");
+          callback();
+        }
+      }
+
+      escribir();
+    }
+
+    function actualizarFrases() {
+      const frasesActuales = container.querySelectorAll("p");
+
+      frasesActuales.forEach((frase, index) => {
+        frase.style.transform = `translateY(${index * 3}rem)`; // Espaciado ajustado en rem
+        frase.style.opacity = Math.max(0, 1 - index * 0.20); // Opacidad se desvanece gradualmente
+      });
+
+      // Remover frases fuera del límite
+      if (frasesActuales.length > maxFrases) {
+        frasesActuales[frasesActuales.length - 1].remove();
+      }
+    }
+
+    function generarFrase() {
+      const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+      escribirFrase(fraseAleatoria, () => {
+        actualizarFrases();
+        setTimeout(generarFrase, 3000); // Esperar 3 segundos después de escribir
+      });
+    }
+
+    // Iniciar el ciclo
+    generarFrase();
+  </script>
 </body>
 </html>
